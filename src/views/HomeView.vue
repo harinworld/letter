@@ -1,18 +1,48 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    
+    <article>
+      <h2>Write</h2>
+      <LetterWriteVue @send="letterSend"/>
+    </article>
+
+    <article>
+      <h2>Preview</h2>
+      <LetterViewVue :data="WriteInfo"/>
+    </article>
+    
   </div>
 </template>
 
 <script>
+import LetterViewVue from '../components/LetterView.vue'
+import LetterWriteVue from '../components/LetterWrite.vue'
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    LetterViewVue, LetterWriteVue
+  },
+  data(){
+    return{
+      WriteInfo : ''
+    }
+  },
+  methods:{
+    letterSend(value){
+      this.WriteInfo = value
+    }
   }
+
 }
 </script>
+
+<style lang="scss">
+.home{
+  display: flex; justify-content: space-between;
+  width:80%; margin:100px auto; 
+  article{width:48%;}
+}
+</style>
